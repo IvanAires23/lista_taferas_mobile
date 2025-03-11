@@ -3,10 +3,19 @@ import logo from "../assets/images/check.png"
 import { colors } from "../constants/colors";
 import { View } from "react-native";
 import { Pressable } from "react-native";
+import { FlatList } from "react-native";
+import Task from "../components/Task";
 
 export default function RootLayout() {
+
+  const tasks = [
+    { id: 1, completed: true, text: "Fazer café" },
+    { id: 2, completed: true, text: "Estudar React Native" },
+    { id: 3, completed: true, text: "Academia" },
+  ]
+
   return (
-    <ScrollView style={style.mainContainer}>
+    <View style={style.mainContainer}>
       <View style={style.rowContainer}>
         <Image source={logo} style={style.image} />
         <Text style={style.title}>Minhas Tarefas</Text>
@@ -21,7 +30,12 @@ export default function RootLayout() {
           <Text style={style.buttonText}>+</Text>
         </Pressable>
       </View>
-    </ScrollView>
+
+      <FlatList
+        data={tasks}
+        renderItem={({ item }) => <Task text={item.text} />}
+      />
+    </View>
   )
 }
 
