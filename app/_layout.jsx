@@ -5,14 +5,24 @@ import { View } from "react-native";
 import { Pressable } from "react-native";
 import { FlatList } from "react-native";
 import Task from "../components/Task";
+import { useState } from "react";
+
+const initialTasks = [
+  { id: 1, completed: true, text: "Fazer café" },
+  { id: 2, completed: true, text: "Estudar React Native" },
+  { id: 3, completed: true, text: "Academia" },
+]
 
 export default function RootLayout() {
 
-  const tasks = [
-    { id: 1, completed: true, text: "Fazer café" },
-    { id: 2, completed: true, text: "Estudar React Native" },
-    { id: 3, completed: true, text: "Academia" },
-  ]
+  const [tasks, setTasks] = useState(initialTasks)
+  const [text, setText] = useState("")
+
+  const addTasks = () => {
+    const newTask = { id: tasks.length + 1, completed: false, text }
+    setTasks([...tasks, newTask])
+    setText("")
+  }
 
   return (
     <View style={style.mainContainer}>
@@ -22,9 +32,12 @@ export default function RootLayout() {
       </View>
 
       <View style={style.rowContainer}>
-        <TextInput style={style.input} />
+        <TextInput
+          value={text}
+          onChangeText={setText}
+          style={style.input} />
         <Pressable
-          onPress={() => Alert.alert("Olá")}
+          onPress={addTasks}
           style={({ pressed }) => [style.button, { backgroundColor: pressed ? "blue" : colors.primary }]}
         >
           <Text style={style.buttonText}>+</Text>
@@ -33,7 +46,7 @@ export default function RootLayout() {
 
       <FlatList
         data={tasks}
-        renderItem={({ item }) => <Task text={item.text} />}
+        renderItem={({ item }) => <Task text={item.text} initialCompleted={item.completed} />}
       />
     </View>
   )
