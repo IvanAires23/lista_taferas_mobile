@@ -57,7 +57,7 @@ export default function RootLayout() {
           }
 
         />
-      </SafeAreav>
+      </SafeAreaView>
     </GestureHandlerRootView>
   )
 }
