@@ -7,6 +7,7 @@ import { FlatList } from "react-native";
 import Task from "../components/Task";
 import { useState } from "react";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const initialTasks = [
   { id: 1, completed: true, text: "Fazer café" },
@@ -27,7 +28,7 @@ export default function RootLayout() {
 
   return (
     <GestureHandlerRootView>
-      <View style={style.mainContainer}>
+      <SafeAreaView style={style.mainContainer}>
         <View style={style.rowContainer}>
           <Image source={logo} style={style.image} />
           <Text style={style.title}>Minhas Tarefas</Text>
@@ -56,7 +57,7 @@ export default function RootLayout() {
           }
 
         />
-      </View>
+      </SafeAreav>
     </GestureHandlerRootView>
   )
 }
