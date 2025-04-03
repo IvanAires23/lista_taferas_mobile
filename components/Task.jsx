@@ -47,6 +47,6 @@ const style = StyleSheet.create({
         shadowOpacity: 0.1,
         shadowOffset: { width: 0, height: 2 },
         backgroundColor: "#ffffff",
-        padding: 10
+        padding: 10,
     }
 })
