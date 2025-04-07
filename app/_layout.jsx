@@ -5,20 +5,48 @@ import { View } from "react-native";
 import { Pressable } from "react-native";
 import { FlatList } from "react-native";
 import Task from "../components/Task";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { SafeAreaView } from "react-native-safe-area-context";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const initialTasks = [
+/*const initialTasks = [
   { id: 1, completed: true, text: "Fazer café" },
   { id: 2, completed: true, text: "Estudar React Native" },
   { id: 3, completed: true, text: "Academia" },
-]
+]*/
 
 export default function RootLayout() {
 
-  const [tasks, setTasks] = useState(initialTasks)
+  const [tasks, setTasks] = useState([])
   const [text, setText] = useState("")
+
+  useEffect(() => {
+    getTasksAsyncStorage = async () => {
+      try {
+        const jsonValue = await AsyncStorage.getItem('tasks')
+        if( jsonValue != null) setTasks(JSON.parse(jsonValue))
+
+      } catch(e) {
+        // read error
+      }
+    }
+
+    getTasksAsyncStorage()
+  }, [])
+
+  useEffect(() => {
+    setTasksAsyncStorage = async () => {
+      try {
+        const jsonValue = JSON.stringify(tasks)
+        await AsyncStorage.setItem('tasks', jsonValue)
+      } catch(e) {
+        // save error
+      }
+    }
+
+    setTasksAsyncStorage()
+  },[tasks] )
 
   const addTasks = () => {
     const newTask = { id: tasks.length + 1, completed: false, text }
