@@ -1,4 +1,4 @@
-import { Alert, Button, Image, ScrollView, StyleSheet, Text, TextInput } from "react-native";
+import { Alert, Button, Image, Platform, ScrollView, StyleSheet, Text, TextInput } from "react-native";
 import logo from "../assets/images/check.png"
 import { colors } from "../constants/colors";
 import { View } from "react-native";
@@ -85,6 +85,10 @@ export default function RootLayout() {
           }
 
         />
+
+        {Platform.OS == "ios" && <Text>Executando em IOS</Text>}
+        {Platform.OS == "android" && <Text>Executando em Android</Text>}
+        {Platform.OS == "web" && <Text>Executando em web</Text>}
       </SafeAreaView>
     </GestureHandlerRootView>
   )
