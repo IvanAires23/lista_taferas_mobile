@@ -89,6 +89,7 @@ export default function RootLayout() {
         {Platform.OS == "ios" && <Text>Executando em IOS</Text>}
         {Platform.OS == "android" && <Text>Executando em Android</Text>}
         {Platform.OS == "web" && <Text>Executando em web</Text>}
+        
       </SafeAreaView>
     </GestureHandlerRootView>
   )
